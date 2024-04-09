@@ -69,3 +69,40 @@ Para eliminar una persona:
 - Presiona "Send".
 
 Recuerda ajustar los valores de las URLs y los datos de ejemplo según tu implementación específica y los datos reales de tu aplicación.
+
+-- Creamos la base de datos Persona (si aún no existe)
+CREATE DATABASE Persona;
+
+-- Nos conectamos a la base de datos Persona (debe ser ejecutado en la línea de comandos de psql o desde una herramienta de administración)
+\c Persona;
+
+-- Creamos la tabla 'persona'
+CREATE TABLE IF NOT EXISTS persona (
+    id SERIAL PRIMARY KEY,
+    fecha_nacimiento DATE NOT NULL,
+    universidad VARCHAR(255) NOT NULL,
+    carrera VARCHAR(255) NOT NULL,
+    -- Se asume que datos_personales será un texto largo, pendiente de definir estructura exacta
+    datos_personales TEXT,
+    tipo_persona_role VARCHAR(50) CHECK (tipo_persona_role IN ('Usuario', 'Administrador')) NOT NULL
+);
+
+-- Creamos la tabla 'preguntas'
+CREATE TABLE IF NOT EXISTS preguntas (
+    id SERIAL PRIMARY KEY,
+    descripcion TEXT NOT NULL
+);
+
+-- Creamos la tabla 'respuestas' que une 'preguntas' con 'persona'
+CREATE TABLE IF NOT EXISTS respuestas (
+    id SERIAL PRIMARY KEY,
+    pregunta_id INT NOT NULL,
+    persona_id INT NOT NULL,
+    respuesta TEXT NOT NULL,
+    FOREIGN KEY (pregunta_id) REFERENCES preguntas (id) ON DELETE CASCADE,
+    FOREIGN KEY (persona_id) REFERENCES persona (id) ON DELETE CASCADE
+);
+
+-- Creamos índices para mejorar la eficiencia en las columnas que se usarán en las búsquedas/join
+CREATE INDEX IF NOT EXISTS idx_preguntas_id ON respuestas(pregunta_id);
+CREATE INDEX IF NOT EXISTS idx_persona_id ON respuestas(persona_id);
