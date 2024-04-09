@@ -1,0 +1,71 @@
+Para probar tu API utilizando Postman con la estructura proporcionada, sigue los pasos detallados a continuación para cada operación CRUD. Asegúrate de tener tu servidor corriendo y de que la base de datos esté configurada correctamente.
+
+### 1. Crear una Persona (POST)
+
+Para crear una nueva persona en tu sistema, configura tu solicitud en Postman de la siguiente manera:
+
+- **Método**: POST
+- **URL**: `http://localhost:3000/api/persons`
+- **Body**:
+  - Selecciona `raw` y luego `JSON` como formato.
+  - Introduce el siguiente JSON:
+
+```json
+{
+  "fecha_nacimiento": "1990-01-01",
+  "universidad": "Universidad Nacional",
+  "carrera": "Ingeniería de Sistemas",
+  "datos_personales": "Datos adicionales aquí",
+  "tipo_persona_role": "Administrador"
+}
+```
+
+- Presiona "Send" para ejecutar la solicitud.
+
+### 2. Leer Todas las Personas (GET)
+
+Para listar todas las personas:
+
+- **Método**: GET
+- **URL**: `http://localhost:3000/api/persons`
+- Presiona "Send".
+
+### 3. Leer una Persona por ID (GET)
+
+Para obtener los detalles de una persona específica por su ID:
+
+- **Método**: GET
+- **URL**: `http://localhost:3000/api/persons/{id}` (reemplaza `{id}` con el ID real de la persona).
+- Presiona "Send".
+
+### 4. Actualizar una Persona (PUT)
+
+Para actualizar una persona existente:
+
+- **Método**: PUT
+- **URL**: `http://localhost:3000/api/persons/{id}` (reemplaza `{id}` con el ID real de la persona).
+- **Body**:
+  - Selecciona `raw` y luego `JSON` como formato.
+  - Introduce el JSON con las actualizaciones que deseas realizar. Por ejemplo:
+
+```json
+{
+  "fecha_nacimiento": "1990-02-02",
+  "universidad": "Universidad Actualizada",
+  "carrera": "Carrera Actualizada",
+  "datos_personales": "Nuevos datos personales aquí",
+  "tipo_persona_role": "Usuario"
+}
+```
+
+- Presiona "Send".
+
+### 5. Eliminar una Persona (DELETE)
+
+Para eliminar una persona:
+
+- **Método**: DELETE
+- **URL**: `http://localhost:3000/api/persons/{id}` (reemplaza `{id}` con el ID real de la persona).
+- Presiona "Send".
+
+Recuerda ajustar los valores de las URLs y los datos de ejemplo según tu implementación específica y los datos reales de tu aplicación.
